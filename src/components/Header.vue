@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import i18n from '@/i18n'
+import { useLanguage } from '@/stores/language';
 import { ref } from 'vue'
+
 const lang = ref<'en' | 'hr'>('en')
 
 const handleChangeLanguage = () => {
-  lang.value = lang.value === 'en' ? 'hr' : 'en'
-  i18n.global.locale = lang.value
+  lang.value = lang.value === 'en' ? 'hr' : 'en';
+  const languageStore = useLanguage()
+  languageStore.setLanguage(lang.value)
 }
 
 defineProps<{ onSearch: (payload: Event) => void }>()
